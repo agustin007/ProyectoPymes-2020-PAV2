@@ -62,11 +62,13 @@ export class ContactosComponent implements OnInit {
       ],
       Activo: [true]
     });
+    this.GetContactos();
   }
 
   GetContactos() {
     this.servicio_contacto.get().subscribe((res: Contacto[]) => {
       this.Items = res;
+      console.log(res);
     });
   }
 
