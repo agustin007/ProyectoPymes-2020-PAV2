@@ -99,7 +99,7 @@
                         && FormContactos.controls.Telefono.errors?.required">
                     Dato requerido.
                 </span>
-				<span class="text-danger" *ngIf="FormContactos.controls.Telefono.errors?.pattern">
+				<span class="text-danger" *ngIf="(FormContactos.controls.Nombre.errors?.minlength || FormContactos.controls.Nombre.errors?.maxlength) ">
                     Dato numérico, 1 a 7 dígitos.
                 </span>
 			</div>
