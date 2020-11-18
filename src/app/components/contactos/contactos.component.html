@@ -2,8 +2,8 @@
 
 <!-- Formulario Filtro de busqueda, se ve cuando la accion es Listado(busqueda/listado)-->
 <div class="bg-light">
-		<!-- Botones -->
-<div id="seccionBuscar"  *ngIf="AccionABMC == 'L'">
+	<!-- Botones -->
+	<div id="seccionBuscar" *ngIf="AccionABMC == 'L'">
 		<div class="row justify-content-center">
 			<button type="button" class="btn btn-primary" (click)="Buscar()">
             <span class="fas fa-search"> </span> Consultar
@@ -14,124 +14,124 @@
             Agregar
         </button>
 		</div>
-</div>
-<!-- Tabla de resutados de busqueda y Paginador-->
-<div id="resultados"  *ngIf="AccionABMC == 'L'">
-  <div id="divTablaResultados">
-		<table class=" table table-bordered table-striped">
-			<thead>
-				<tr>
-					<th class=" text-center">IdContacto</th>
-					<th class="text-center">Nombre</th>
-					<th class="text-center">Fecha nacimiento</th>
-					<th class="text-center">Telefono</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let item of Items">
-					<td>{{item.IdContacto}}</td>
-					<td>{{item.Nombre}}</td>
-					<td>{{item.FechaNacimiento}}</td>
-					<td>{{item.Telefono}}</td>
-				</tr>
-			</tbody>
-		</table>
+	</div>
+	<!-- Tabla de resutados de busqueda y Paginador-->
+	<div id="resultados" *ngIf="AccionABMC == 'L' && Items?.length > 0">
+		<div id="divTablaResultados">
+			<table class=" table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class=" text-center">IdContacto</th>
+						<th class="text-center">Nombre</th>
+						<th class="text-center">Fecha nacimiento</th>
+						<th class="text-center">Telefono</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of Items">
+						<td>{{item.IdContacto}}</td>
+						<td>{{item.Nombre}}</td>
+						<td>{{item.FechaNacimiento| date:'dd/MM/yyyy'}}</td>
+						<td>{{item.Telefono}}</td>
+					</tr>
+				</tbody>
+			</table>
 
-  </div>
-</div>
+		</div>
+	</div>
 
 
-<!-- Registro en Alta,Modificacion y Consulta -->
-<form name="FormContactos" [formGroup]='FormContactos' *ngIf="AccionABMC != 'L'" class="bg-light">
+	<!-- Registro en Alta,Modificacion y Consulta -->
+	<form name="FormContactos" [formGroup]='FormContactos' *ngIf="AccionABMC != 'L'" class="bg-light">
 
-	<fieldset [disabled]="AccionABMC==='C'">
-		<!--campo nombre-->
-		<div class="form-group row">
-			<label class="col-form-label col-sm-2 col-sm-offset-2" for="Nombre">Nombre <span
+		<fieldset [disabled]="AccionABMC==='C'">
+			<!--campo nombre-->
+			<div class="form-group row">
+				<label class="col-form-label col-sm-2 col-sm-offset-2" for="Nombre">Nombre <span
                     class="text-danger">*</span></label>
-			<div class="col-sm-6">
-				<input type="text" class="form-control" formControlName="Nombre"
+				<div class="col-sm-6">
+					<input type="text" class="form-control" formControlName="Nombre"
          [ngClass]="{'is-invalid': (FormContactos.controls.Nombre.touched || submitted)  
             && FormContactos.controls.Nombre.errors}" />
 
-				<span class="text-danger" *ngIf="(FormContactos.controls.Nombre.touched || submitted) 
+					<span class="text-danger" *ngIf="(FormContactos.controls.Nombre.touched || submitted) 
                         && FormContactos.controls.Nombre.errors?.required">
                     Dato requerido.
                 </span>
-				<span class="text-danger" *ngIf="(FormContactos.controls.Nombre.errors?.minlength || FormContactos.controls.Nombre.errors?.maxlength) ">
+					<span class="text-danger" *ngIf="(FormContactos.controls.Nombre.errors?.minlength || FormContactos.controls.Nombre.errors?.maxlength) ">
                     Dato texto, 4 a 55 caracteres.
                 </span>
 
+				</div>
 			</div>
-		</div>
 
-		<!--campo FechaNacimiento-->
-		<div class="form-group row">
-			<label class="col-form-label col-sm-2 col-sm-offset-2">Fecha de alta <span
+			<!--campo FechaNacimiento-->
+			<div class="form-group row">
+				<label class="col-form-label col-sm-2 col-sm-offset-2">Fecha de alta <span
                     class="text-danger">*</span></label>
-			<div class="col-sm-6">
-				<input class="form-control"
+				<div class="col-sm-6">
+					<input class="form-control"
                            name="FechaNacimiento" formControlName="FechaNacimiento"
                            [ngClass]="{'is-invalid': (FormContactos.controls.FechaNacimiento.touched || submitted)  
             && FormContactos.controls.FechaNacimiento.errors}" />
 
-				<span class="text-danger" *ngIf="(FormContactos.controls.FechaNacimiento.touched || submitted) 
+					<span class="text-danger" *ngIf="(FormContactos.controls.FechaNacimiento.touched || submitted) 
                        && FormContactos.controls.FechaNacimiento.errors?.required">
                     Dato requerido.
                 </span>
-				<span class="text-danger" *ngIf="FormContactos.controls.FechaNacimiento.errors?.pattern">
+					<span class="text-danger" *ngIf="FormContactos.controls.FechaNacimiento.errors?.pattern">
                     Dato fecha, formato dd/mm/aaaa.
         </span>
+				</div>
 			</div>
-		</div>
 
 
-		<!--campo Telefono-->
-		<div class="form-group row">
-			<label class="col-form-label col-sm-2 col-sm-offset-2" for="Telefono">
+			<!--campo Telefono-->
+			<div class="form-group row">
+				<label class="col-form-label col-sm-2 col-sm-offset-2" for="Telefono">
                 Telefono <span class="text-danger">*</span>
             </label>
-			<div class="col-sm-6">
-				<input type="text" name="Telefono" class="form-control" formControlName="Telefono"
+				<div class="col-sm-6">
+					<input type="text" name="Telefono" class="form-control" formControlName="Telefono"
         [ngClass]="{'is-invalid': (FormContactos.controls.Telefono.touched || submitted)  
             && FormContactos.controls.Telefono.errors}" />
-				<span class="text-danger" *ngIf="(FormContactos.controls.Telefono.touched || submitted) 
+					<span class="text-danger" *ngIf="(FormContactos.controls.Telefono.touched || submitted) 
                         && FormContactos.controls.Telefono.errors?.required">
                     Dato requerido.
                 </span>
-				<span class="text-danger" *ngIf="(FormContactos.controls.Nombre.errors?.minlength || FormContactos.controls.Nombre.errors?.maxlength) ">
+					<span class="text-danger" *ngIf="(FormContactos.controls.Nombre.errors?.minlength || FormContactos.controls.Nombre.errors?.maxlength) ">
                     Dato numérico, 1 a 7 dígitos.
                 </span>
+				</div>
 			</div>
-		</div>
 
-		<!--campo activo-->
-		<div class="form-group row">
-			<label class="col-form-label col-sm-2 col-sm-offset-2" for="Activo">Activo</label>
-			<div class="col-sm-6">
-				<select name="Activo" disabled class="form-control" formControlName="Activo">
+			<!--campo activo-->
+			<div class="form-group row">
+				<label class="col-form-label col-sm-2 col-sm-offset-2" for="Activo">Activo</label>
+				<div class="col-sm-6">
+					<select name="Activo" disabled class="form-control" formControlName="Activo">
                     <option *ngFor="let opt of OpcionesActivo" [ngValue]="opt.Id">
                         ‌{{ opt.Nombre }}
                     <option>
                 </select>
+				</div>
 			</div>
-		</div>
-	</fieldset>
+		</fieldset>
 
-	<!-- Botones Grabar, Cancelar/Volver' -->
-	<div class="row justify-content-center">
-		<button type="button" *ngIf="AccionABMC!=='C'" class="btn btn-primary" (click)="Grabar()">
+		<!-- Botones Grabar, Cancelar/Volver' -->
+		<div class="row justify-content-center">
+			<button type="button" *ngIf="AccionABMC!=='C'" class="btn btn-primary" (click)="Grabar()">
             <span class="fas fa-check"></span> Grabar
         </button>
-		&nbsp;
-		<button type="button" class="btn btn-warning" (click)="Volver()">
+			&nbsp;
+			<button type="button" class="btn btn-warning" (click)="Volver()">
             <span class="fas fa-undo"></span> {{AccionABMC=='C' ? 'Volver' : 'Cancelar'}}
         </button>
-	</div>
+		</div>
 
-	<!--texto: Revisar los datos ingresados...-->
-	<div id="divMsjFormContactosistro" *ngIf="submitted && FormContactos.invalid" class="row alert alert-danger">
-		<span class="fas fa-exclamation-sign"></span>{{Mensajes['RD']}}
-	</div>
+		<!--texto: Revisar los datos ingresados...-->
+		<div id="divMsjFormContactosistro" *ngIf="submitted && FormContactos.invalid" class="row alert alert-danger">
+			<span class="fas fa-exclamation-sign"></span>{{Mensajes['RD']}}
+		</div>
 
-</form>
+	</form>

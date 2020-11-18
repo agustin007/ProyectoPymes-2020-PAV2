@@ -62,7 +62,7 @@ export class ContactosComponent implements OnInit {
       ],
       Activo: [true]
     });
-    this.GetContactos();
+    //this.GetContactos();
   }
 
   GetContactos() {
